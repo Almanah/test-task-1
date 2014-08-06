@@ -1,5 +1,5 @@
 var Widget = Backbone.model.extend({
-
+	
 });
 
 var TwitterWidget = Widget.extend({
