@@ -3,14 +3,32 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test task 1</title>
-	<link rel = "stylesheet" type = "text/css" href = "css/main.css">	
+	<link rel = "stylesheet" type = "text/css" href = "css/mr-widget.css">	
 </head>
 <body>
 	<div id = "MRWidget"></div>
 	<script src = "js/jquery-2.1.1.js"></script>
 	<script src = "js/underscore.js"></script>
 	<script src = "js/backbone.js"></script>
-	<script type = "text/template" src = "js/widget-template.js" id = "widgetTemplate"></script>
-	<script src = "js/widget.js"></script>
+	<!-- Template for widget -->
+	<script type = "text/template" id = "MRWidgetTemplate">
+		<div class = "linksBox">
+			<img class = "profilePhoto" src = "<%= userImage %>">
+			<a class = "profileHandle" href = "<%= userUrl %>" target = "_blank">@<%= userName %></a>
+			<a class = "timestamp" href = "<%= postUrl %>" target = "_blank"><%= time %></a>
+		</div>
+		<article class = "contentBox">
+			<%= content %>
+		</article>
+		<div class = "countsBox">
+			<% for(count in counts) { %>
+				<div class = "<%= count %>"> 
+					<img src = "" alt = "<%= count %>">
+					<span><%= counts[count] %></span>
+				</div>
+			<% } %>
+		</div>
+	</script>
+	<script src = "js/mr-widget.js"></script>
 </body>
 </html>
