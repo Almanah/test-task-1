@@ -7,9 +7,9 @@
 </head>
 <body>
 	<div id = "MRWidget"></div>
-	<script src = "js/jquery-2.1.1.js"></script>
-	<script src = "js/underscore.js"></script>
-	<script src = "js/backbone.js"></script>
+	<script src = "http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src = "http://documentcloud.github.io/underscore/underscore-min.js"></script>
+	<script src = "http://backbonejs.org/backbone-min.js"></script>
 	<!-- Template for widget -->
 	<script type = "text/template" id = "MRWidgetTemplate">
 		<div class = "linksBox">
@@ -23,8 +23,8 @@
 		<div class = "countsBox">
 			<% for(count in counts) { %>
 				<div class = "<%= count %>"> 
-					<img src = "" alt = "<%= count %>">
-					<span><%= counts[count] %></span>
+					<img src = "<%= counts[count].imageSrc %>" alt = "<%= count %>">
+					<span><%= counts[count].value %></span>
 				</div>
 			<% } %>
 		</div>
