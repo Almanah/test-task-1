@@ -9,26 +9,38 @@
 }
 
 .linksBox {
+	position: relative;
+
 	width: 100%;
 	height: 40px;
 
 }
 
 .linksBox a {
+	color: black;
 	text-decoration: none;
 }
 
-.linksBox .profilePhoto {	
+.linksBox .profilePhoto {
+	position: absolute;
+	left: 10px;
+
 	width: 40px;
 	height: 40px;
 }
 
 .linksBox .profileHandle {
-
+	position: absolute;
+	left: 55px;
+	top: 20px;
 }
 
 .linksBox .timestamp {
-	
+	position: absolute;
+	right: 10px;
+	top: 20px;
+
+	font-weight: bold;
 }
 
 .contentBox {
@@ -38,13 +50,35 @@
 }
 
 .contentBox img {
+	height: 230px;
+}
+
+.contentBox .tweet {
+	width: 280px;
 	height: 220px;
+	margin: 10px auto 0 auto;
+
+	text-align: left;
 }
 
 .countsBox {
-	height: 40px;
+	position: relative;
+
+	height: 30px;
 }
 
 .countsBox div {
+	position: absolute;
+
 	display: inline-block;
+}
+
+.countsBox .likes,
+.countsBox .favorites {
+	left: 10px;
+}
+
+.countsBox .comments,
+.countsBox .retweets {
+	right: 10px;
 }
