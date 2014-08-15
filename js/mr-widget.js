@@ -1,7 +1,7 @@
 (function() {
 
 	//	Set your parametres here
-	var URL = 'http://api.massrelevance.com/jmskey/vmn.json',	// Url of your stream
+	var URL = 'https://api.massrelevance.com/jmskey/ema-instagram-video.json',	// Url of your stream
 		REFRESH_INTERVAL = 5000;	// Refresh time in milliseconds
 
 	//Backbone logic
@@ -21,7 +21,7 @@
 		template: _.template($('#MRWidgetTemplate').html()),
 
 		initialize: function() {		
-			this.currentPost = 0;
+			this.currentPost = window.sessionStorage.mrWingetCurrPost || 0;
 			this.postsCount = this.collection.length;
 			//	Need to rerender view if content of current post updates
 			this.collection.on('change:content', (function(view) {
@@ -35,10 +35,12 @@
 		},
 
 		startRefreshing: function() {
-			this.currentPost++;
+			//this.currentPost++;
+			window.sessionStorage.mrWingetCurrPost = this.currentPost++;
 			this.render(this.currentPost, true);			
 			if(this.currentPost === this.postsCount)
-				return;
+				this.currentPost = 0;
+				//return;
 			setTimeout(this.startRefreshing.bind(this), REFRESH_INTERVAL);
 		},
 
@@ -61,7 +63,7 @@
 		}
 	});
 
-	//
+	//	Create array of models
 	var parseResponse = function(rawJSON) {
 		var rawPosts = JSON.parse(rawJSON),
 			posts = [];
@@ -86,8 +88,8 @@
 		newPost.set({
 			userName: element.user.screen_name,
 			userImage: element.user.profile_image_url,
-			userUrl: 'http://twitter.com/' + newPost.get('userName'),
-			postUrl: 'http://twitter.com/' + newPost.get('userName') + '/status/' + element.id_str,
+			userUrl: 'http://twitter.com/' + element.user.screen_name,
+			postUrl: 'http://twitter.com/' + element.user.screen_name + '/status/' + element.id_str,
 			rawTime: element.created_at,
 			counts: {
 				favorites: {
@@ -100,20 +102,33 @@
 				}
 			}
 		});
-
 		//Check vine or not
 		if(expandedURL.indexOf('vine.co/v/') !== -1) {				
-			var url = 'http://api.embed.ly/1/oembed?url=' + expandedURL + '&height=230';
+			var url = prefix + '://api.embed.ly/1/oembed?url=' + expandedURL + '&height=230';
 			getEmbedVideo(newPost, url);
 			newPost.set('type', 'vine');
 		} else {
 			newPost.set({
 				type: 'tweet',
-				content: '<div class = "tweet">' + element.text + '</div>'
+				content: '<div class = "tweet">' + parseTweet(element.text) + '</div>'
 			});				
 		}
 		return newPost;
 	};
+
+	//	Parse links in tweets
+	var parseTweet = function(rawTweet) {
+		var words = rawTweet.split(' '),
+			tweet = '';
+
+		words.forEach(function(word) {
+			if((word.indexOf('http://') === 0 || word.indexOf('https://') === 0) && word.indexOf('…') === -1) {	// last indexOf check for unfinished link
+				word = '<a href = "' + word +'" target = "_blank">' + word + '</a>';
+			}
+			tweet += (word + ' ');
+		});
+		return tweet;
+	}
 
 	var createInstagramModel = function(element) {
 		var newPost = new Post();
@@ -123,7 +138,7 @@
 			rawTime: element.created_time * 1000,
 			userName: element.user.username,
 			userImage: element.user.profile_picture,
-			userUrl: 'http://instagram.com/' + newPost.get('userName'),
+			userUrl: 'http://instagram.com/' + element.user.username,
 			postUrl: element.link,
 			counts: {
 				likes: {
@@ -141,7 +156,7 @@
 			newPost.set('content', '<a href = "' + newPost.get('postUrl') + '" target = "_blank"><img src = "' + element.images.standard_resolution.url + '"></a>');
 		} else {
 			var videoUrl = element.link,
-				url = 'http://api.embed.ly/1/oembed?url=' + videoUrl + '&height=230';
+				url = prefix + '://api.embed.ly/1/oembed?url=' + videoUrl + '&height=230';
 			getEmbedVideo(newPost, url);
 		}
 		return newPost;
@@ -183,22 +198,29 @@
 			var postDate = new Date(postTime);
 			timestamp = dateConstants.monthNames[postDate.getMonth()] + ' ' + postDate.getDate() + ', ' + postDate.getFullYear();
 		}
-		console.log(postTime, currentTime, timestamp);
 		return timestamp;		
 	};
 
+	var prefix = URL.indexOf('https') === 0 ? 'https' : 'http';
 	//	Widget start point 
 	var createQueue = (function () {
-		var xhr = new XMLHttpRequest();
-			xhr.onload = function() {
-				if(this.status === 200 && this.responseText.length !== 0) {
-					var	postsQueue = new PostsQueue(parseResponse(this.responseText)),
-					appView = new WidgetView({collection: postsQueue});					
-				} else {
-					$('#MRWidget').html('Sorry, some kind of error has occurred<br>' + this.status + ' ' + this.statusText);
-				}
-			};
-		xhr.open('GET', URL, true);
-		xhr.send();
+		if(window.sessionStorage.mrWidgetStream === undefined) {
+			var xhr = new XMLHttpRequest();
+				xhr.onload = function() {
+					if(this.status === 200 && this.responseText.length !== 0) {
+						var	postsQueue = new PostsQueue(parseResponse(this.responseText)),
+						appView = new WidgetView({collection: postsQueue});
+
+						window.sessionStorage.mrWidgetStream = this.responseText;
+					} else {
+						$('#MRWidget').html('Sorry, some kind of error has occurred<br>' + this.status + ' ' + this.statusText);
+					}
+				};
+			xhr.open('GET', URL, true);
+			xhr.send();
+		} else {
+			var	postsQueue = new PostsQueue(parseResponse(window.sessionStorage.mrWidgetStream)),
+			appView = new WidgetView({collection: postsQueue});
+		}
 	})();
 })();
