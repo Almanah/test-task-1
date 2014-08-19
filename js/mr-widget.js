@@ -92,14 +92,8 @@
 			postUrl: 'http://twitter.com/' + element.user.screen_name + '/status/' + element.id_str,
 			rawTime: element.created_at,
 			counts: {
-				favorites: {
-					value: element.favorite_count,
-					imageSrc: 'https://si0.twimg.com/images/dev/cms/intents/icons/favorite_hover.png'
-				},
-				retweets: {
-					value: element.retweet_count,
-					imageSrc: 'https://si0.twimg.com/images/dev/cms/intents/icons/retweet_hover.png'
-				}
+				favorites: element.favorite_count,
+				retweets: element.retweet_count
 			}
 		});
 		//Check vine or not
@@ -141,14 +135,8 @@
 			userUrl: 'http://instagram.com/' + element.user.username,
 			postUrl: element.link,
 			counts: {
-				likes: {
-					value: element.likes.count,
-					imageSrc: ''
-				},
-				comments: {
-					value: element.comments.count,
-					imageSrc: ''
-				}
+				likes: element.likes.count,
+				comments: element.comments.count					
 			}
 		});
 		//	Check type of post

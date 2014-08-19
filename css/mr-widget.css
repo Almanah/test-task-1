@@ -78,7 +78,23 @@
 	left: 10px;
 }
 
+.likes .img {
+	background: none;
+}
+
+.favorites .img {
+	background: url('https://si0.twimg.com/images/dev/cms/intents/icons/favorite_hover.png');
+}
+
 .countsBox .comments,
 .countsBox .retweets {
 	right: 10px;
+}
+
+.comments .img {
+	background: none;
+}
+
+.retweets .img {
+	background: url('https://si0.twimg.com/images/dev/cms/intents/icons/retweet_hover.png');
 }

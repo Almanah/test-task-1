@@ -17,14 +17,14 @@
 			<a class = "profileHandle" href = "<%= userUrl %>" target = "_blank">@<%= userName %></a>
 			<a class = "timestamp" href = "<%= postUrl %>" target = "_blank"><%= time %></a>
 		</div>
-		<article class = "contentBox">
+		<div class = "contentBox">
 			<%= content %>
-		</article>
+		</div>
 		<div class = "countsBox">
 			<% for(count in counts) { %>
 				<div class = "<%= count %>"> 
-					<img src = "<%= counts[count].imageSrc %>" alt = "<%= count %>">
-					<span><%= counts[count].value %></span>
+					<div class = "img">
+					<span><%= counts[count] %></span>
 				</div>
 			<% } %>
 		</div>
