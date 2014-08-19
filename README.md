@@ -2,7 +2,7 @@ test-task-1
 ===========
 Need to fix:
 •	Use Collection.fetch() instead of XHR
-•	Use Collection.fetch() instead of parseResponse
+•	Use Collection.parse instead of parseResponse
 •	Remove sessionStorage
 •	Implement parseTweet using RegExp
 •	Move parseDate to View and improve it for days, weeks, month and so on
