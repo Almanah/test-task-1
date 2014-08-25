@@ -8,7 +8,7 @@
 	border: 1px solid blue;
 }
 
-.linksBox {
+#MRWidget .linksBox {
 	position: relative;
 
 	width: 100%;
@@ -16,12 +16,12 @@
 
 }
 
-.linksBox a {
+#MRWidget .linksBox a {
 	color: black;
 	text-decoration: none;
 }
 
-.linksBox .profilePhoto {
+#MRWidget .profilePhoto {
 	position: absolute;
 	left: 10px;
 
@@ -29,13 +29,13 @@
 	height: 40px;
 }
 
-.linksBox .profileHandle {
+#MRWidget .profileHandle {
 	position: absolute;
 	left: 55px;
 	top: 20px;
 }
 
-.linksBox .timestamp {
+#MRWidget .timestamp {
 	position: absolute;
 	right: 10px;
 	top: 20px;
@@ -43,58 +43,75 @@
 	font-weight: bold;
 }
 
-.contentBox {
+#MRWidget .contentBox {
 	height: 230px;
 
 	text-align: center;
 }
 
-.contentBox img {
+#MRWidget .contentBox img {
 	height: 230px;
+	max-width: 280px;
 }
 
-.contentBox .tweet {
+#MRWidget .contentBox .tweet {
 	width: 280px;
 	height: 220px;
-	margin: 10px auto 0 auto;
+	padding: 10px 10px 0 10px;
 
 	text-align: left;
 }
 
-.countsBox {
+#MRWidget .countsBox {
 	position: relative;
 
-	height: 30px;
+	height: 25px;
+
+	font-size: 16px;
 }
 
-.countsBox div {
+#MRWidget .countsBox div {
 	position: absolute;
 
 	display: inline-block;
+
+	vertical-align: -7px;
 }
 
-.countsBox .likes,
-.countsBox .favorites {
+#MRWidget .countsBox .img {
+	position: static;
+
+	width: 25px;
+	height: 25px;
+}
+
+#MRWidget .countsBox .likes,
+#MRWidget .countsBox .favorites {
 	left: 10px;
 }
 
-.likes .img {
-	background: none;
+#MRWidget .likes .img {
+
+	background: url('../i/mr-widget/likes.png') no-repeat;
+	background-size: 100% 100%;
 }
 
-.favorites .img {
-	background: url('https://si0.twimg.com/images/dev/cms/intents/icons/favorite_hover.png');
+#MRWidget .favorites .img {
+	background: url('../i/mr-widget/favorites.png') no-repeat;
+	background-size: 100% 100%;
 }
 
-.countsBox .comments,
-.countsBox .retweets {
+#MRWidget .countsBox .comments,
+#MRWidget .countsBox .retweets {
 	right: 10px;
 }
 
-.comments .img {
-	background: none;
+#MRWidget .comments .img {
+	background: url('../i/mr-widget/comments.png') no-repeat;
+	background-size: 100% 100%;
 }
 
-.retweets .img {
-	background: url('https://si0.twimg.com/images/dev/cms/intents/icons/retweet_hover.png');
+#MRWidget .retweets .img {
+	background: url('../i/mr-widget/retweets.png')no-repeat;
+	background-size: 100% 100%;
 }

@@ -13,18 +13,18 @@
 	<!-- Template for widget -->
 	<script type = "text/template" id = "MRWidgetTemplate">
 		<div class = "linksBox">
-			<img class = "profilePhoto" src = "<%= userImage %>">
-			<a class = "profileHandle" href = "<%= userUrl %>" target = "_blank">@<%= userName %></a>
-			<a class = "timestamp" href = "<%= postUrl %>" target = "_blank"><%= time %></a>
+			<img class = "profilePhoto" src = "<%= model.userImage %>">
+			<a class = "profileHandle" href = "<%= model.userUrl %>" target = "_blank">@<%= model.userName %></a>
+			<a class = "timestamp" href = "<%= model.postUrl %>" target = "_blank"><%= view.time %></a>
 		</div>
 		<div class = "contentBox">
-			<%= content %>
+			<%= view.content %>
 		</div>
 		<div class = "countsBox">
-			<% for(count in counts) { %>
+			<% for(count in model.counts) { %>
 				<div class = "<%= count %>"> 
-					<div class = "img">
-					<span><%= counts[count] %></span>
+					<div class = "img"></div>
+					<span><%= model.counts[count] %></span>
 				</div>
 			<% } %>
 		</div>
