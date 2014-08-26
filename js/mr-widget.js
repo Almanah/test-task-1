@@ -43,7 +43,7 @@
 				type: data.type,
 	 			rawTime: data.created_time * 1000,
 	 			userName: data.user.username,
-	 			userImage: data.user.profile_picture,
+	 			userImage: data.user.profile_picture.replace(/https|http/, prefix),
 	 			userUrl: 'http://instagram.com/' + data.user.username,
 	 			postUrl: data.link,
 	 			counts: {
