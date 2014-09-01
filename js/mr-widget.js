@@ -82,7 +82,6 @@
 			msInDay: 86400000,
 			msInHour: 3600000,
 			msInMinute: 60000,
-			monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov', 'Dec']
 		},
 
 		initialize: function() {
