@@ -1,3 +1,4 @@
+	/*  Widget box  */
 #MRWidget {
 	display: inline-block;
 	width: 300px;
@@ -8,12 +9,12 @@
 	border: 1px solid blue;
 }
 
+	/*  Ures and post info area  */
 #MRWidget .linksBox {
 	position: relative;
 
 	width: 100%;
 	height: 40px;
-
 }
 
 #MRWidget .linksBox a {
@@ -43,6 +44,7 @@
 	font-weight: bold;
 }
 
+	/*  Content area  */
 #MRWidget .contentBox {
 	height: 230px;
 
@@ -62,6 +64,7 @@
 	text-align: left;
 }
 
+	/*  Likes and etc area  */
 #MRWidget .countsBox {
 	position: relative;
 
@@ -91,7 +94,6 @@
 }
 
 #MRWidget .likes .img {
-
 	background: url('../i/mr-widget/likes.png') no-repeat;
 	background-size: 100% 100%;
 }

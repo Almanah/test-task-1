@@ -14,8 +14,8 @@
 				hash = {
 					userName: data.user.screen_name,
 		 			userImage: (prefix === 'http') ? data.user.profile_image_url : data.user.profile_image_url_https,
-		 			userUrl: 'http://twitter.com/' + data.user.screen_name,
-		 			postUrl: 'http://twitter.com/' + data.user.screen_name + '/status/' + data.id_str,
+		 			userUrl: prefix + '://twitter.com/' + data.user.screen_name,
+		 			postUrl: prefix + '://twitter.com/' + data.user.screen_name + '/status/' + data.id_str,
 		 			rawTime: data.created_at,
 		 			counts: {
 		 				favorites: data.favorite_count,
@@ -44,7 +44,7 @@
 	 			rawTime: data.created_time * 1000,
 	 			userName: data.user.username,
 	 			userImage: data.user.profile_picture.replace(/https|http/, prefix),
-	 			userUrl: 'http://instagram.com/' + data.user.username,
+	 			userUrl: prefix + '://instagram.com/' + data.user.username,
 	 			postUrl: data.link,
 	 			counts: {
 	 				likes: data.likes.count,
@@ -52,7 +52,7 @@
 	 			}
 			};
 			if(hash.type === 'image') {
-				hash.contentUrl = data.images.standard_resolution.url;
+				hash.contentUrl = data.images.standard_resolution.url.replace(/https|http/, prefix);
 			} else {
 				hash.contentUrl = prefix + '://api.embed.ly/1/oembed?url=' + data.link + '&height=230';
 			}
@@ -199,7 +199,7 @@
 
 		parseTweet: function(rawTweet) {
 			var tweet = rawTweet;
-			tweet = tweet.replace(/(http|https):\/\/(t\.co)\/(\w*)/g, '<a href = \"$1://$2/$3\" target = "blank">$1://$2/$3</a>');
+			tweet = tweet.replace(/(http|https):\/\/(t\.co)\/(\w*)/g, '<a href = \"' + prefix + '://$2/$3\" target = "blank">' + prefix + '://$2/$3</a>');
 			return tweet;
 		}
 	});
