@@ -1,7 +1,8 @@
+'use strict';
 (function() {
 
 	//------	Set your parametres here	---------------------------------------------------------
-	var URL = 'http://api.massrelevance.com/jmskey/vmn.json',	// Url of your stream
+	var URL = 'http://api.massrelevance.com/jmskey/ema-instagram.json',	// Url of your stream
 		REFRESH_INTERVAL = 5000;	// Refresh time in milliseconds
 	//-----------------------------------------------------------------------------------------------
 
